@@ -26,6 +26,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField fx:id="txtName" layoutX="125.0" layoutY="326.0" prefHeight="37.0" prefWidth="302.0" />
+      <TextField fx:id="txtName" alignment="TOP_CENTER" layoutX="125.0" layoutY="326.0" prefHeight="37.0" prefWidth="302.0" promptText="Nombre" />
+      <TextField fx:id="txtNAliens" alignment="TOP_CENTER" layoutX="125.0" layoutY="258.0" prefHeight="37.0" prefWidth="302.0" promptText="N° Alienss" />
    </children>
 </Pane>

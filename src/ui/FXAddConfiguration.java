@@ -2,6 +2,8 @@ package ui;
 
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import model.SpaceInvader;
 public class FXAddConfiguration {
 	private Stage primaryStage ;
 	private SpaceInvaderGui spaceInvader ;
+	private FXlevels levels;
 	private SpaceInvader spaceInvader2 ;
     public FXAddConfiguration(SpaceInvader spaceInvader2, Stage primaryStage) {
     	this.primaryStage = primaryStage;
@@ -24,7 +27,8 @@ public class FXAddConfiguration {
 		
 		
 	}
-    
+    @FXML
+    private TextField txtNAliens;
     
 	@FXML
     private ImageView paneRealName;
@@ -51,8 +55,32 @@ public class FXAddConfiguration {
     }
 
     @FXML
-    void starGame(ActionEvent event) {
+    void starGame(ActionEvent event) throws IOException {
+    	if (txtNAliens.getText().equals("") || txtName.getText().equals("")) {
+			JOptionPane.showMessageDialog(null, "Debe llenar los datos solicitados", "Error",
+					JOptionPane.WARNING_MESSAGE);
 
+		}else {
+			String name = txtName.getText();
+			int cuantityAliens = Integer.parseInt(txtNAliens.getText());
+			spaceInvader2.addPeople(name,cuantityAliens);
+
+			levels = new FXlevels(spaceInvader2, primaryStage);
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+			
+			fxmlLoader.setController(levels);
+			
+			Parent root = fxmlLoader.load();
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Space_invader");
+			Image icon = new Image("/images/Title.png");
+			primaryStage.getIcons().add(icon);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+			levels.loadBanner();
+		}
     }
     @FXML
     private BorderPane welcome;
