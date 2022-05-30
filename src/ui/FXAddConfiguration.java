@@ -63,23 +63,29 @@ public class FXAddConfiguration {
 		}else {
 			String name = txtName.getText();
 			int cuantityAliens = Integer.parseInt(txtNAliens.getText());
-			spaceInvader2.addPeople(name,cuantityAliens);
+			if(cuantityAliens < 3 || cuantityAliens >5) {
+				JOptionPane.showMessageDialog(null, "La cantidad de aliens debe estar entre 3 y 5", "Error",
+						JOptionPane.WARNING_MESSAGE);
+			}			
+			else {
+				spaceInvader2.addPeople(name,cuantityAliens);
 
-			levels = new FXlevels(spaceInvader2, primaryStage);
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
-			
-			fxmlLoader.setController(levels);
-			
-			Parent root = fxmlLoader.load();
-			
-			Scene scene = new Scene(root);
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("Space_invader");
-			Image icon = new Image("/images/Title.png");
-			primaryStage.getIcons().add(icon);
-			primaryStage.setResizable(false);
-			primaryStage.show();
-			levels.loadBanner();
+				levels = new FXlevels(spaceInvader2, primaryStage);
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+				
+				fxmlLoader.setController(levels);
+				
+				Parent root = fxmlLoader.load();
+				
+				Scene scene = new Scene(root);
+				primaryStage.setScene(scene);
+				primaryStage.setTitle("Space_invader");
+				Image icon = new Image("/images/Title.png");
+				primaryStage.getIcons().add(icon);
+				primaryStage.setResizable(false);
+				primaryStage.show();
+				levels.loadBanner();
+			}
 		}
     }
     @FXML

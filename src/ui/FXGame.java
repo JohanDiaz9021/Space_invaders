@@ -8,9 +8,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
@@ -53,7 +55,8 @@ public class FXGame {
 	private boolean knowShoot;
 	private double ballInMoveX;
 	private double positionBallX;
-	private int levels;
+	private long count;
+	private long currentCount;
 	private int scores;
 	@FXML
 	private ImageView imageBackGround;
@@ -70,21 +73,53 @@ public class FXGame {
 	@FXML
 	private Label score;
 
-	@FXML
-	private Label levelss;
 
 	@FXML
 	private Rectangle bullet;
 	private Alien firstAlien;
 
-	@FXML
-	void loadBanner(ActionEvent event) {
 
-	}
 
 	@FXML
-	void moveShip(KeyEvent event) {
+	void moveShip(KeyEvent event) throws InterruptedException {
+		count = System.currentTimeMillis();
+		if ((event.getCode() == KeyCode.LEFT || event.getCode() == KeyCode.A) && ship.getPosX() >= 12) {
+			ship.moveLeft();
 
+		}
+		if ((event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.D) && ship.getPosX() <= 462) {
+			ship.moveRight();
+
+		}
+		if (ship.getShip() == TypeSpacecraft.ATTACK_SHIP) {
+
+			if ((event.getCode().equals(KeyCode.SPACE)|| event.getCode() == KeyCode.W) && currentCount < count - VELOCITY) {
+				currentCount = count;
+				Circle circles = new Circle();
+				knowShoot = true;
+				circles.setLayoutX(positionBallX);
+				circles.setLayoutY(positionBallY);
+				circles.setRadius(circle.getRadius());
+				welcome.getChildren().add(circles);
+				moveBall(circles);
+			}
+
+		} else if (ship.getShip() == TypeSpacecraft.RECOGNITION_SHIP) {
+
+			if ((event.getCode().equals(KeyCode.SPACE) || event.getCode() == KeyCode.W)
+					&& currentCount < count - VELOCITYSLOW) {
+				currentCount = count;
+				knowShoot = true;
+				Circle circles = new Circle();
+				circles.setLayoutX(positionBallX);
+				circles.setLayoutY(positionBallY);
+				circles.setRadius(circle.getRadius());
+				welcome.getChildren().add(circles);
+				moveBall(circles);
+			}
+		}
+
+		mainShip.setLayoutX(ship.getPosX());
 	}
 
 	
@@ -93,9 +128,10 @@ public class FXGame {
 	@FXML
 	private BorderPane welcome;
 
-	private Level level;
+	private SpaceInvader spaceInvade;
 
 	public FXGame(SpaceInvader spaceInvader, Stage primaryStage, String dificultad, int numberAliens) {
+		this.spaceInvade = spaceInvader;
 		firstAlien = null;
 		dificult = dificultad;
 		window = primaryStage;
@@ -105,10 +141,11 @@ public class FXGame {
 		ballInMoveX = 0;
 		ballInMoveY = 0;
 		verify = true;
-		levels = 1;
 		scores = 0;
 		shootAliens = 0;
 		lvl = new Level(numberAliens);
+		currentCount = 0;
+		count = System.nanoTime();
 	}
 
 	public void load() throws IOException {
@@ -137,7 +174,6 @@ public class FXGame {
 		positionBallY = circle.getLayoutY();
 
 		createMatrix(POSTITIONALIENTX, POSTITIONALIENTY);
-		levelss.setText(String.valueOf(levels));
 
 		int atackSpeed = 0;
 
@@ -147,7 +183,7 @@ public class FXGame {
 		} else {
 			atackSpeed = 1500;
 		}
-		BulletsThread bulletThread = new BulletsThread(this, firstAlien, verify, atackSpeed);
+		BulletsThread bulletThread = new BulletsThread(this, firstAlien, verify, atackSpeed,spaceInvade.getCuantityAlins());
 		bulletThread.start();
 
 		mainShip.setVisible(true);
@@ -178,12 +214,13 @@ public class FXGame {
 			createMatrix(x, y);
 			moveAlien(firstAlien);
 		} else {
-			createMatrix(x, y, contX, contY + 100, image1, image2, firstAlien, i);
+			createMatrix(x, y, contX, contY + 100, image1, image2, firstAlien, i,spaceInvade.getCuantityAlins()-1);
 		}
 	}
 
-	public void createMatrix(int x, int y, int contX, int contY, Image image1, Image image2, Alien current, int i) {
-		int hola = 0;
+	public void createMatrix(int x, int y, int contX, int contY, Image image1, Image image2, Alien current, int i,int cuantity) {
+		
+	cuantity--;
 		Alien alien = new Alien(POSTITIONALIENTX, POSTITIONALIENTY, contX, contY, image1, image2);
 
 		if (dificult.equals("novato")) {
@@ -204,7 +241,9 @@ public class FXGame {
 			if (current.getPrev() != null) {
 				current.getDown().setPrev(current.getPrev().getDown());
 			}
-			createMatrix(x, y, contX + 100, contY - 100, image1, image2, current, i);
+			
+				createMatrix(x, y, contX + 100, contY - 100, image1, image2, current, i,cuantity);
+			
 
 		} else if (current != null && current.getNext() == null) {
 
@@ -212,7 +251,9 @@ public class FXGame {
 				moveAlien(alien);
 				current.setNext(alien);
 				current.getNext().setPrev(current);
-				createMatrix(x, y, contX, contY + 100, image1, image2, current.getNext(), ++i);
+				
+					createMatrix(x, y, contX, contY + 100, image1, image2, current.getNext(), ++i,cuantity);
+				
 			} else {
 				current.setNext(alien);
 				Alien alien1 = new Alien(POSTITIONALIENTX, POSTITIONALIENTY, contX, contY, image1, image2);
@@ -300,15 +341,15 @@ public class FXGame {
 
 	@FXML
 	public void gameOver() throws IOException {
-
+		System.out.println("Ganaste");
 		verify = false;
 
-		welcome.getChildren().clear();
+		//welcome.getChildren().clear();
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover-pane.fxml"));
+		//FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover-pane.fxml"));
 
-		loader.setController(this);
-		Parent load = loader.load();
+		//loader.setController(this);
+		//Parent load = loader.load();
 		bullet.setVisible(false);
 		// Image image = new Image("/images/insertName.png");
 		// insertName.setImage(image);
@@ -342,57 +383,22 @@ public class FXGame {
 	}
 
 	public void setLevels() throws IOException {
-		int out = 0;
-		if (shootAliens % 10 == 0) {
-
-			verify = false;
-
-			firstAlien = null;
-
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("game-pane.fxml"));
-
-			loader.setController(this);
-			Parent load = loader.load();
-
-			Image image = new Image("images/fondoGame.png");
-
-			imageBackGround.setImage(image);
-
-			if (ship.getShip() == TypeSpacecraft.ATTACK_SHIP) {
-				Image imageShip = new Image("images/ship1.png");
-				mainShip.setImage(imageShip);
-				mainShip.setLayoutX(ship.getPosX());
-
-			} else {
-				Image imageShip = new Image("images/ship2.png");
-				mainShip.setImage(imageShip);
-				mainShip.setLayoutX(ship.getPosX());
-			}
-
-			welcome.getChildren().clear();
-			welcome.setTop(load);
-			circle.setVisible(false);
-			bullet.setVisible(false);
-			positionBallX = circle.getLayoutX();
-			positionBallY = circle.getLayoutY();
-			verify = true;
-
-			levels += 1;
-			levelss.setText(String.valueOf(levels));
-			score.setText(String.valueOf(scores));
-			velocityLevel += 1;
-
-			createMatrix(POSTITIONALIENTX, POSTITIONALIENTY);
-			int atackSpeed = 0;
-
-			if (dificult.equals("Leyenda") && hard != null) {
-				atackSpeed = (hard.getAttackSpeed() - 2);
-
-			} else {
-				atackSpeed = 1500;
-			}
-			BulletsThread bulletThread = new BulletsThread(this, firstAlien, verify, atackSpeed);
-			bulletThread.start();
+	int num =spaceInvade.getCuantityAlins()*2;
+		if (shootAliens % num  == 0) {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+			
+			fxmlLoader.setController(game);
+			
+			Parent root = fxmlLoader.load();
+			
+			Scene scene = new Scene(root);
+			window.setScene(scene);
+			window.setTitle("Space_invader");
+			Image icon = new Image("/images/Title.png");
+			window.getIcons().add(icon);
+			window.setResizable(false);
+			window.show();
+			window.load();
 
 		}
 	}
@@ -455,7 +461,7 @@ public class FXGame {
 			bullets.setLayoutX(alien.getPositionX() + 40);
 			bullets.setLayoutX(alien.getPositionY() - 10);
 
-			bullets.setFill(javafx.scene.paint.Color.ROYALBLUE);
+			bullets.setFill(javafx.scene.paint.Color.BLUE);
 			bullets.setLayoutX(alien.getPositionX());
 			bullets.setLayoutY(alien.getPositionY() + 30);
 
@@ -497,4 +503,22 @@ public class FXGame {
 		}
 
 	}
+	public void moveBall(Circle circles) throws InterruptedException {
+		circles.setVisible(true);
+		circles.setFill(javafx.scene.paint.Color.WHITE);
+		circles.setLayoutX(ship.getPosX() + 40);
+
+		window.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent event) {
+				verify = false;
+			}
+		});
+
+		moveBalls(circles);
+	}
+
+	
+
 }

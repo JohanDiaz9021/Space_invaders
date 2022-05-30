@@ -51,6 +51,7 @@ public class FXlevels {
 
 		dificultad.getItems().addAll("Novato", "Cadete", "Experto");
 		welcome.setTop(load);
+		int error = 0;
 		level = new Level(spaceInvader.getCuantityAlins());
 		normalMovement = 10;
 		setDificult("");
@@ -76,7 +77,7 @@ public class FXlevels {
 			alert.setContentText("Debe selecionar una dificultad");
 			alert.showAndWait();
 		} else {
-			System.out.println("hola");
+			System.out.println("hola 80 FXlevels");
 			setVerify(true);
 			setGame(new FXGame(spaceInvader, primaryStage,dificultad.getValue(),spaceInvader.getCuantityAlins()));
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));

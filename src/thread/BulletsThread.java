@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import model.Alien;
 import ui.FXGame;
 
-
 public class BulletsThread extends Thread {
 
 	private FXGame aliensInvadersGUI;
@@ -14,59 +13,73 @@ public class BulletsThread extends Thread {
 	private Alien alien;
 	private Alien current;
 	private int attack;
+	private int aliens;
 
-	public BulletsThread(FXGame aliensInvadersGUI,Alien alien,boolean verify,int attack) {
+	public BulletsThread(FXGame aliensInvadersGUI, Alien alien, boolean verify, int attack, int cuantityAlins) {
 		this.aliensInvadersGUI = aliensInvadersGUI;
 		this.verify = verify;
 		this.alien = alien;
 		this.attack = attack;
+		aliens = cuantityAlins;
 		current = null;
 	}
 
 	public void run() {
-		
-		while(verify) {
 
-			if(alien != null) {
+		while (verify) {
+
+			if (alien != null) {
 
 				current = alien;
 				Random alienToSelect = new Random();
-				int aleatorio = (int)(alienToSelect.nextDouble() * 10);
+				int aleatorio = (int) (alienToSelect.nextDouble() * aliens);
 				int cont = 0;
-				alien.getNext().getNext().getNext().getNext().setNext(null);
+				int erro = 0;
 				
-				for (int i = 0; i <= aleatorio; i++) {
-					
-					if(cont < 5) {
-						 if(current.getNext() != null) {
-							 cont++;
-							 current = current.getNext();
-						 }else {
-							 cont++;
-							 current = current.getDown();
-						 }
+				if (aliens == 2) {
+					alien.getNext().setNext(null);
+				}
+				if (aliens == 3) {
+					alien.getNext().getNext().setNext(null);
+				}
+				if (aliens == 4) {
+					alien.getNext().getNext().getNext().setNext(null);
+				}
+				if (aliens == 5) {
+					alien.getNext().getNext().getNext().getNext().setNext(null);
+				}
 
-					}else if(cont == 5 && current.getNext() == null && current.getDown() != null) {
+				for (int i = 0; i <= aleatorio; i++) {
+
+					if (cont < aliens) {
+						if (current.getNext() != null) {
+							cont++;
+							current = current.getNext();
+						} else {
+							cont++;
+							current = current.getDown();
+						}
+
+					} else if (cont == aliens && current.getNext() == null && current.getDown() != null) {
 						cont++;
 						current = current.getDown();
 
-					}
-					else if(cont > 4 && current.getPrev() != null) {
+					} else if (cont > aliens-1 && current.getPrev() != null) {
 						cont++;
 						current = current.getPrev();
 					}
 				}
 			}
-			Platform.runLater(new Thread(){
+			Platform.runLater(new Thread() {
 				public void run() {
 
-					if(current.getVisible()) {
-						//try {
+					if (current.getVisible()) {
+						try {
 							int hola = 0;
-						//	aliensInvadersGUI.selectAlien(current);
+							aliensInvadersGUI.selectAlien(current);
 							verify = aliensInvadersGUI.getVerify();
-					//	} //catch (InterruptedException e) {
-						//}
+						} catch (InterruptedException e) {
+						}
 					}
 				}
 
@@ -74,9 +87,9 @@ public class BulletsThread extends Thread {
 
 			verify = aliensInvadersGUI.getVerify();
 
-			try{
+			try {
 				Thread.sleep(attack);
-			}catch(InterruptedException e) {
+			} catch (InterruptedException e) {
 
 			}
 

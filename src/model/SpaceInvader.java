@@ -5,6 +5,7 @@ package model;
 public class SpaceInvader {
 	private String namePlayerOf ; 
 	private int cuantityAlins;
+	
 	public void addPeople(String name,int aliens)  {
 		
 		setNamePlayerOf(name);
