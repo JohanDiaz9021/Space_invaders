@@ -11,12 +11,12 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="gameOver" fitHeight="705.0" fitWidth="552.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="211.0" layoutY="142.0" text="Score:" textFill="WHITE">
+      <Label layoutX="193.0" layoutY="142.0" text="Score:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Label>
-      <Label fx:id="scoreOver" layoutX="306.0" layoutY="142.0" text="000" textFill="WHITE">
+      <Label fx:id="scoreOver" layoutX="301.0" layoutY="142.0" text="000" textFill="WHITE">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>

@@ -8,12 +8,13 @@ import ui.FXGame;
 
 public class BubbleThread extends Sorting implements CompareTwoPlayers{
 	
-	private FXGame aliensInvadersGUI;
+	@SuppressWarnings("unused")
+	private FXGame fxGame;
 	
-	public BubbleThread(FXGame aliensInvadersGUI, ArrayList<Player> listPlayers) {
+	public BubbleThread(FXGame fxGame, ArrayList<Player> listPlayers) {
 		
 		super(listPlayers);
-		this.aliensInvadersGUI = aliensInvadersGUI;
+		this.fxGame = fxGame;
 	}
 	
 	@Override
@@ -44,13 +45,9 @@ public class BubbleThread extends Sorting implements CompareTwoPlayers{
 		int verify = playerOne.getNick().compareTo(playerTwo.getNick());
 		
 		if(verify == 0) {
-			if(playerOne.getLevel() == playerTwo.getLevel()) {
-				verify = 0;
-			}else if(playerOne.getLevel() > playerTwo.getLevel()){
+			
 				verify = 1;
-			}else if(playerOne.getLevel() < playerTwo.getLevel()) {
-				verify = -1;
-			}
+			int las = 0;
 		}
 		
 		return verify;

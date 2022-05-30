@@ -51,7 +51,6 @@ public class FXlevels {
 
 		dificultad.getItems().addAll("Novato", "Cadete", "Experto");
 		welcome.setTop(load);
-		int error = 0;
 		level = new Level(spaceInvader.getCuantityAlins());
 		normalMovement = 10;
 		setDificult("");

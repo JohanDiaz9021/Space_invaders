@@ -10,18 +10,16 @@ public class Player extends People implements Serializable, CompareTo{
 
 	private String nick;
 	private int score;
-	private int level;
 	private Player prev;
 	private Player next;
 	private Player parent;
 
 	
 
-	public Player(String name, String nick,int score, int level) {
+	public Player(String name, String nick,int score) {
 		super(name);
 		this.setNick(nick);
 		this.setScore(score);
-		this.setLevel(level);
 	}
 
 	public int getScore() {
@@ -32,13 +30,6 @@ public class Player extends People implements Serializable, CompareTo{
 		this.score = score;
 	}
 
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
 
 	public String getNick() {
 		return nick;
@@ -77,7 +68,7 @@ public class Player extends People implements Serializable, CompareTo{
 	public String toString() {
 		String message = "";
 
-		message = "Nickname: "+nick+" | Score : "+score+" | Level "+ level+"\n";
+		message = "Nickname: "+nick+" | Score : "+score;
 
 		return message;
 	}
