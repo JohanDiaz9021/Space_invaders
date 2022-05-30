@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 
 
-public class Player extends People implements Serializable, CompareTo{
+public class Player extends People implements Serializable{
 
 	private static final long serialVersionUID = 1;
 
@@ -74,7 +74,7 @@ public class Player extends People implements Serializable, CompareTo{
 	}
 
 	
-	@Override
+	
 	public int compareTo(String nick) {
 
 		int verify = getNick().compareTo(nick);

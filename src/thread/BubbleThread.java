@@ -2,11 +2,10 @@ package thread;
 
 import java.util.ArrayList;
 
-import model.CompareTwoPlayers;
 import model.Player;
 import ui.FXGame;
 
-public class BubbleThread extends Sorting implements CompareTwoPlayers{
+public class BubbleThread extends Sorting {
 	
 	@SuppressWarnings("unused")
 	private FXGame fxGame;
@@ -35,11 +34,9 @@ public class BubbleThread extends Sorting implements CompareTwoPlayers{
 				}
 			}
 		}
-		int hola = 0;
-		//aliensInvadersGUI.inicializateTableViewPlayer(getListPlayers());
 	}
 	
-	@Override
+	
 	public int compareTwoPlayers(Player playerOne, Player playerTwo) {
 		
 		int verify = playerOne.getNick().compareTo(playerTwo.getNick());
@@ -47,7 +44,6 @@ public class BubbleThread extends Sorting implements CompareTwoPlayers{
 		if(verify == 0) {
 			
 				verify = 1;
-			int las = 0;
 		}
 		
 		return verify;
