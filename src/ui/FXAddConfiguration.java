@@ -18,7 +18,7 @@ import model.SpaceInvader;
 
 public class FXAddConfiguration {
 	private Stage primaryStage ;
-	private SpaceInvaderGui spaceInvader ;
+	private FXSpaceInvader spaceInvader ;
 	private FXlevels levels;
 	private SpaceInvader spaceInvader2 ;
     public FXAddConfiguration(SpaceInvader spaceInvader2, Stage primaryStage) {
@@ -37,7 +37,7 @@ public class FXAddConfiguration {
 
     @FXML
     void back(ActionEvent event) throws IOException {
-    	spaceInvader = new SpaceInvaderGui(spaceInvader2, primaryStage);
+    	spaceInvader = new FXSpaceInvader(spaceInvader2, primaryStage);
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
 		
 		fxmlLoader.setController(spaceInvader);

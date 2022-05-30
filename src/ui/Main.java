@@ -11,7 +11,7 @@ import model.SpaceInvader;
 
 public class Main extends Application{
 	private SpaceInvader spaceInvader;
-	private SpaceInvaderGui spaceInvaderGui;
+	private FXSpaceInvader fXSpaceInvader;
 	public Main() {
 		spaceInvader = new SpaceInvader();
 	}
@@ -22,11 +22,11 @@ public class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
-		spaceInvaderGui = new SpaceInvaderGui(spaceInvader, primaryStage);
+		fXSpaceInvader = new FXSpaceInvader(spaceInvader, primaryStage);
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
 		
-		fxmlLoader.setController(spaceInvaderGui);
+		fxmlLoader.setController(fXSpaceInvader);
 		
 		Parent root = fxmlLoader.load();
 		
@@ -37,7 +37,7 @@ public class Main extends Application{
 		primaryStage.getIcons().add(icon);
 		primaryStage.setResizable(false);
 		primaryStage.show();
-		spaceInvaderGui.loadBanner();
+		fXSpaceInvader.loadBanner();
 	}
 	
 }

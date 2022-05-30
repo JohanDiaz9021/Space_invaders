@@ -81,7 +81,6 @@ public class SpaceInvader {
 		oos.close();
 	}
 	public boolean loadData() {
-		System.out.println("entra a load data");
 		boolean verify = true;
 
 		File players = new File(SAVE_PLAYERS);
@@ -118,7 +117,7 @@ public class SpaceInvader {
 			newlist.add(firstBest);
 		}
 
-		while(cont <= 5 && !listPlayer.isEmpty()) {
+		while(cont <= 6 && !listPlayer.isEmpty()) {
 
 			stop = true;
 

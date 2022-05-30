@@ -7,17 +7,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import model.Player;
 import model.SpaceInvader;
 
 public class FXpodium {
 	private SpaceInvader space;
-
-	public FXpodium(SpaceInvader space) {	
+	private Stage primaryStage;
+	public FXpodium(SpaceInvader space,  Stage primaryStage) {	
 		this.space = space;
+		this.primaryStage = primaryStage;
 		space.loadData();
 	}
 
@@ -87,12 +91,26 @@ public class FXpodium {
 
 	    @FXML
 	    private Label score6;
-
+	    private FXSpaceInvader fXSpaceInvader;
 	   
-
+	   
 	    @FXML
-	    void returnPage(ActionEvent event) {
-
+	    void returnPage(ActionEvent event) throws IOException {
+	    	fXSpaceInvader = new FXSpaceInvader(space, primaryStage);
+	    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+			
+			fxmlLoader.setController(fXSpaceInvader);
+			
+			Parent root = fxmlLoader.load();
+			
+			Scene scene = new Scene(root);
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("Space_invader");
+			Image icon = new Image("/images/Title.png");
+			primaryStage.getIcons().add(icon);
+			primaryStage.setResizable(false);
+			primaryStage.show();
+			fXSpaceInvader.loadBanner();
 	    }
 	    public void searchPodium() {
 
@@ -122,6 +140,11 @@ public class FXpodium {
 
 								nick5.setText(newList.get(4).getNick());
 								score5.setText(String.valueOf("Score: "+newList.get(4).getScore()));
+							}
+							if(newList.size() > 5 && newList.get(5) != null) {
+
+								nick6.setText(newList.get(5).getNick());
+								score6.setText(String.valueOf("Score: "+newList.get(5).getScore()));
 							}
 						}
 					}

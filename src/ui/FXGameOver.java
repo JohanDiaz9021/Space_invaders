@@ -27,7 +27,7 @@ public class FXGameOver {
 	private boolean win;
 	@FXML
 	private BorderPane welcome;
-	private SpaceInvaderGui spaceInvaderGui;
+	private FXSpaceInvader fXSpaceInvader;
 
 	public FXGameOver(SpaceInvader spaceInvader, Stage window, int puntaje, boolean win) {
 		super();
@@ -65,10 +65,10 @@ public class FXGameOver {
 	}
 
 	private void returnInicio() throws IOException {
-		spaceInvaderGui = new SpaceInvaderGui(spaceInvader, window);
+		fXSpaceInvader = new FXSpaceInvader(spaceInvader, window);
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
 		
-		fxmlLoader.setController(spaceInvaderGui);
+		fxmlLoader.setController(fXSpaceInvader);
 		
 		Parent root = fxmlLoader.load();
 		
@@ -79,7 +79,7 @@ public class FXGameOver {
 		window.getIcons().add(icon);
 		window.setResizable(false);
 		window.show();
-		spaceInvaderGui.loadBanner();
+		fXSpaceInvader.loadBanner();
 		
 	}
 

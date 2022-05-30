@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.SpaceInvader;
 
-public class SpaceInvaderGui {
+public class FXSpaceInvader {
 	private Stage primaryStage;
 	private FXAddConfiguration fxaddConfig;
 	@FXML
@@ -25,10 +25,10 @@ public class SpaceInvaderGui {
 	@FXML
 	private BorderPane welcome;
 
-	public SpaceInvaderGui(SpaceInvader spaceInvader, Stage primaryStage) {
+	public FXSpaceInvader(SpaceInvader spaceInvader, Stage primaryStage) {
 		space = spaceInvader;
 		space.loadData();
-		podium = new FXpodium(space);
+		podium = new FXpodium(space,primaryStage);
 		fxaddConfig = new FXAddConfiguration(space, primaryStage);
 		this.primaryStage = primaryStage;
 	}
@@ -82,8 +82,5 @@ public class SpaceInvaderGui {
 		fxaddConfig.loadBanner();
 	}
 
-	@FXML
-	void scores(ActionEvent event) {
-
-	}
+	
 }
