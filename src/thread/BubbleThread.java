@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import model.Player;
 import ui.FXGame;
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 public class BubbleThread extends Sorting {
 	
 	@SuppressWarnings("unused")

@@ -5,7 +5,12 @@ import java.util.Random;
 import javafx.application.Platform;
 import model.Alien;
 import ui.FXGame;
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 public class BulletsThread extends Thread {
 
 	private FXGame aliensInvadersGUI;

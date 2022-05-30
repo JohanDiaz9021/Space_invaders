@@ -7,7 +7,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import model.Alien;
 import ui.FXGame;
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 public class SearchAlienThread extends Thread {
 
 	private FXGame aliensInvadersGUI;

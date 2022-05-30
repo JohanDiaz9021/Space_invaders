@@ -1,5 +1,10 @@
 package ui;
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 import java.io.IOException;
 
 import javafx.application.Platform;

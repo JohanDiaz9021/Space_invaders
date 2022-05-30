@@ -8,7 +8,12 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.SpaceInvader;
 
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 public class Main extends Application{
 	private SpaceInvader spaceInvader;
 	private FXSpaceInvader fXSpaceInvader;

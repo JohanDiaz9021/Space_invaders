@@ -6,7 +6,12 @@ import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 import model.Alien;
 import ui.FXGame;
-
+/**
+ * @version 1
+ * @author Johan sebastian diaz, https://github.com/JohanDiaz9021 <br>
+ * @author Jose guerrero  ,https://github.com/guerreroSoloCali <br>
+ * @author Juan Manuel velosa ,https://github.com/JuanVelosa <br>
+ */
 public class AlienThread extends Thread{
 	
 	private FXGame aliensInvadersGUI;
