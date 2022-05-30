@@ -10,21 +10,19 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="backGround" fitHeight="705.0" fitWidth="559.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="gameOver" fitHeight="956.0" fitWidth="1458.0" layoutX="-453.0" layoutY="-250.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="201.0" layoutY="242.0" text="Score:" textFill="WHITE">
+      <ImageView fx:id="gameOver" fitHeight="705.0" fitWidth="552.0" pickOnBounds="true" preserveRatio="true" />
+      <Label layoutX="211.0" layoutY="142.0" text="Score:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Label>
-      <Label fx:id="scoreOver" layoutX="300.0" layoutY="244.0" text="000" textFill="WHITE">
+      <Label fx:id="scoreOver" layoutX="306.0" layoutY="142.0" text="000" textFill="WHITE">
          <font>
             <Font name="System Bold" size="31.0" />
          </font>
       </Label>
-      <ImageView fx:id="insertName" fitHeight="523.0" fitWidth="896.0" layoutX="-172.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="nickName" layoutX="126.0" layoutY="367.0" prefHeight="30.0" prefWidth="301.0" style="-fx-background-radius: 10;" />
-      <Button layoutX="203.0" layoutY="434.0" mnemonicParsing="false" onAction="#loadPlayers" prefHeight="46.0" prefWidth="146.0" style="-fx-background-radius: 15; -fx-background-color: black; -fx-border-color: white; -fx-border-radius: 15;" text="GUARDAR" textFill="#57cbab">
+      <Button layoutX="203.0" layoutY="434.0" mnemonicParsing="false" onAction="#addplayer" prefHeight="46.0" prefWidth="146.0" style="-fx-background-radius: 15; -fx-background-color: white; -fx-border-color: white; -fx-border-radius: 15;" text="GUARDAR" textFill="#131414">
          <font>
             <Font name="System Bold" size="19.0" />
          </font>
@@ -32,5 +30,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Label fx:id="labelWinner" layoutX="142.0" layoutY="14.0" text="GANASTE" textFill="WHITE">
+         <font>
+            <Font name="Bodoni Bk BT Book" size="64.0" />
+         </font>
+      </Label>
+      <Label fx:id="player" layoutX="237.0" layoutY="92.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="Bodoni Bk BT Book" size="36.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

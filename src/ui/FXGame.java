@@ -3,7 +3,6 @@ package ui;
 import java.io.IOException;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -341,27 +340,22 @@ public class FXGame {
 
 	@FXML
 	public void gameOver() throws IOException {
-		System.out.println("Ganaste");
-		verify = false;
-
-		//welcome.getChildren().clear();
-
-		//FXMLLoader loader = new FXMLLoader(getClass().getResource("gameover-pane.fxml"));
-
-		//loader.setController(this);
-		//Parent load = loader.load();
-		bullet.setVisible(false);
-		// Image image = new Image("/images/insertName.png");
-		// insertName.setImage(image);
-		// Image image2 = new Image("/images/gameOver.png");
-		// gameOver.setImage(image2);
-		// Image image3 = new Image("/images/backGround.png");
-		// backGround.setImage(image3);
-
-		// mainPane.setTop(load);
-
-		// scoreOver.setText(String.valueOf(scores));
-	}
+		FXGameOver fx = new FXGameOver(spaceInvade, window, scores, false);
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
+		
+		fxmlLoader.setController(fx);
+		
+		Parent root = fxmlLoader.load();
+		
+		Scene scene = new Scene(root);
+		window.setScene(scene);
+		window.setTitle("Space_invader");
+		Image icon = new Image("/images/Title.png");
+		window.getIcons().add(icon);
+		window.setResizable(false);
+		window.show();
+		fx.loadBanner();	}
 
 	public boolean getVerify() {
 		return verify;
@@ -384,10 +378,12 @@ public class FXGame {
 
 	public void setLevels() throws IOException {
 	int num =spaceInvade.getCuantityAlins()*2;
-		if (shootAliens % num  == 0) {
+		if ( shootAliens % num == 0) {
+			
+			FXGameOver fx = new FXGameOver(spaceInvade, window, scores, true);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Welcome.fxml"));
 			
-			fxmlLoader.setController(game);
+			fxmlLoader.setController(fx);
 			
 			Parent root = fxmlLoader.load();
 			
@@ -398,8 +394,7 @@ public class FXGame {
 			window.getIcons().add(icon);
 			window.setResizable(false);
 			window.show();
-			window.load();
-
+			fx.loadBanner();
 		}
 	}
 
