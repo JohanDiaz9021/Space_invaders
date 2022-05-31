@@ -13,7 +13,7 @@
    <center>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="552.0">
          <children>
-            <ImageView fx:id="backgroundPodium" fitHeight="715.0" fitWidth="552.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="backgroundPodium" fitHeight="715.0" fitWidth="602.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Space_invaders/src/images/FondoJuego.jpg" />
                </image>

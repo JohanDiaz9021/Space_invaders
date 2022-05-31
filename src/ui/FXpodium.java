@@ -47,6 +47,9 @@ public class FXpodium {
 
 		loader.setController(this);
 		Parent load = loader.load();
+		Image image = new Image("images/FondoJuego.jpg");
+
+		backgroundPodium.setImage(image);
 		welcome.getChildren().clear();
 		searchPodium();
 		welcome.setTop(load);
